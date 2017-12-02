@@ -165,7 +165,7 @@ uo_addfile() {
 
 	# copy the file
 	if ! uo_priv install -m 644 -o root -g wheel -- \
-		"${src}" "ramdisk.d/${dest}"; then
+		"${src}" "${WRKDIR}/ramdisk.d/${dest}"; then
 	
 		uo_priv umount "/dev/vnd${vnd_n}a" || true
 		uo_priv vnconfig -u "vnd${vnd_n}" || true
