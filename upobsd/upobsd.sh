@@ -238,3 +238,6 @@ uo_download
 
 # place bsd.rd where asked
 uo_output
+
+# cleanup
+uo_cleanup
