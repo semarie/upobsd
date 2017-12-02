@@ -219,7 +219,7 @@ shift $(( OPTIND -1 ))
 
 # update SIGNIFY_VERSION according to OS_VERSION
 case "${OS_VERSION}" in
-[0-9].[0-9])	SIGNIFY_VERSION="${OPTARG%.[0-9]}${OPTARG#[0-9].}" ;;
+[0-9].[0-9])	SIGNIFY_VERSION="${OS_VERSION%.[0-9]}${OS_VERSION#[0-9].}" ;;
 esac
 
 [[ -n "${RESPONSE_FILE}" && ! -e ${RESPONSE_FILE} ]] && \
