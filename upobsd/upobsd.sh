@@ -15,7 +15,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 set -eu
-PATH='/sbin:/bin:/usr/sbin:/usr/bin'
+PATH='/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
 
 VERBOSE=0
 MIRROR=$(cat /etc/installurl)
