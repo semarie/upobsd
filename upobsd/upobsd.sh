@@ -102,7 +102,7 @@ uo_check_signature() {
 	[ -r "${WRKDIR}/SHA256.sig" ] || \
 		uo_err 2 "uo_check_signature: no SHA256.sig in WRKDIR"
 
-	if [ -n "${SIGNIFY_KEY}" ]; then
+	if [ -z "${SIGNIFY_KEY}" ]; then
 		uo_signify "/etc/signify/openbsd-${SIGNIFY_VERSION}-base.pub"
 	else
 		uo_signify "${SIGNIFY_KEY}"
