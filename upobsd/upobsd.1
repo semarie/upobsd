@@ -1,0 +1,124 @@
+.\"
+.\" Copyright (c) 2018 Sebastien Marie <semarie@online.fr>
+.\"
+.\" Permission to use, copy, modify, and distribute this software for any
+.\" purpose with or without fee is hereby granted, provided that the above
+.\" copyright notice and this permission notice appear in all copies.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.\"
+.Dd Dec 2, 2017
+.Dt UPOBSD 1
+.Os
+.Sh NAME
+.Nm upobsd
+.Nd download, verify and patch bsd.rd image
+.Sh SYNOPSIS
+.Nm
+.Op Fl v
+.Op Fl m Ar mirror
+.Op Fl V Ar version
+.Op Fl a Ar arch
+.Op Fl p Ar signify-key
+.Op Fl i Ar install-response-file
+.Op Fl u Ar upgrade-response-file
+.Op Fl o Ar output
+.Sh DESCRIPTION
+.Nm
+is a
+.Xr ksh 1
+script designed to download, verify and optionally patch bsd.rd image.
+.Pp
+.Nm
+will download bsd.rd image using
+.Xr ftp 1
+from mirror defined in
+.Xr installurl 5 ,
+will verify the downloaded file using
+.Xr signify 1
+and local key inside
+.Pa /etc/signify
+to ensure integrity, and optionally patch the image for adding
+.Pa auto_install.conf
+or
+.Pa auto_upgrade.conf
+file to add support of offline
+.Xr autoinstall 8 .
+.Pp
+Patching requires super-user privilegies in order to use
+.Xr vnconfig 8
+and
+.Xr mount 8
+for modifying the ramdisk image.
+.Xr doas 1
+will be used for this purpose and should be configured accordingly.
+.Pp
+The options are as follows:
+.Bl -tag -width Ds
+.It Fl v
+Enable verbose mode.
+Forces
+.Nm
+to show all steps of the process.
+If the input is a terminal, progress bar for downloading will be always showed.
+.It Fl V Ar version
+Select an operating system version.
+By default,
+.Nm
+will download bsd.rd for current running version.
+.It Fl a Ar arch
+Select a specific architecture.
+By default,
+.Nm
+will use current system architecture as
+.Xr uname 1
+report it.
+.It Fl p Ar signify-key
+Specify a particular file as public-key for
+.Xr signify 1
+in order to check
+.Pa SHA256.sig
+and
+.Pa bsd.rd
+files.
+By default, a key from
+.Pa /etc/signify
+is selected using the requested operating system version.
+But the right key should be manually selected when requesting a snapshot
+and its version is the next release.
+.It Fl i Ar install-response-file
+Adds
+.Ar install-response-file
+as
+.Pa auto_install.conf
+inside the ramdisk of bsd.rd image.
+.It Fl u Ar upgrade-response-file
+Adds
+.Ar upgrade-response-file
+as
+.Pa auto_upgrade.conf
+inside the ramdisk of bsd.rd image.
+If both
+.Fl i
+and
+.Fl u
+are used, only the latest option on command-line is considered.
+.It Fl o Ar output
+Selects a different output name from
+.Pa bsd.rd
+in the current directory.
+.El
+.Sh SEE ALSO
+.Xr ftp 1 ,
+.Xr signify 1
+.Sh AUTHORS
+.An -nosplit
+.Nm
+was written by
+.An Sebastien Marie Aq Mt semarie@online.fr .
