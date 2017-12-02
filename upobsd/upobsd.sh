@@ -114,7 +114,7 @@ uo_signify() {
 
 	uo_verbose "checking signature: ${signify_key}"
 
-	[ -e "${SIGNIFY_KEY}" ] || uo_err 1 "uo_check_signature: file no found: ${signify_key}"
+	[ -e "${signify_key}" ] || uo_err 1 "uo_check_signature: file not found: ${signify_key}"
 
 	( cd "${WRKDIR}" && \
 		signify -qC -p "${signify_key}" -x SHA256.sig bsd.rd ) ||
