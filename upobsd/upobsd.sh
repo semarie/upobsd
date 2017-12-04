@@ -140,7 +140,7 @@ uo_addfile() {
 	uo_verbose "adding response file: ${dest}: ${src}"
 
 	# extract ramdisk from bsd.rd
-	rdsetroot -x "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
+	elfrdsetroot -x "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
 
 	# create mountpoint
 	mkdir "${WRKDIR}/ramdisk.d"
@@ -189,7 +189,7 @@ uo_addfile() {
 	rmdir "${WRKDIR}/ramdisk.d"
 
 	# put ramdisk back in bsd.rd
-	rdsetroot "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
+	elfrdsetroot "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
 }
 
 uo_output() {
