@@ -5,9 +5,9 @@
 - https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/distrib/common/
 - https://github.com/openbsd/src/tree/master/distrib/common/
 
-# Licence
+# License
 
-`elfrdsetroot.c` has the following licence:
+`elfrdsetroot.c` has the following license:
 
 ```
 Copyright (c) 1994 Gordon W. Ross
