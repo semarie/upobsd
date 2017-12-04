@@ -1,5 +1,5 @@
 SUBDIR = 
-SUBDIR += rdsetroot
+SUBDIR += elfrdsetroot
 SUBDIR += upobsd
 
 .include <bsd.subdir.mk>
