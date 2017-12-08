@@ -119,6 +119,8 @@ uo_signify() {
 	( cd "${WRKDIR}" && \
 		signify -qC -p "${signify_key}" -x SHA256.sig bsd.rd ) ||
 		uo_err 1 "invalid signature: ${signify_key}"
+
+	uo_verbose "signature is valid"
 }
 
 uo_priv() {
