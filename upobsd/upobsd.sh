@@ -66,7 +66,7 @@ uo_err() {
 
 	echo "error: ${@}" >&2
 	uo_cleanup
-	
+
 	exit ${exitcode}
 }
 
@@ -166,7 +166,7 @@ uo_addfile() {
 	# copy the file
 	if ! uo_priv install -m 644 -o root -g wheel -- \
 		"${src}" "${WRKDIR}/ramdisk.d/${dest}"; then
-	
+
 		uo_priv umount "/dev/vnd${vnd_n}a" || true
 		uo_priv vnconfig -u "vnd${vnd_n}" || true
 
@@ -176,7 +176,7 @@ uo_addfile() {
 	# umount vndX
 	if ! uo_priv umount "/dev/vnd${vnd_n}a" ; then
 		uo_priv vnconfig -u "vnd${vnd_n}" || true
-		
+
 		uo_err 1 "unable to umount: /dev/vnd${vnd_n}a"
 	fi
 
