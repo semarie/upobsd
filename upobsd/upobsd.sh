@@ -1,6 +1,6 @@
 #!/bin/ksh
 #
-# Copyright (c) 2017 Sebastien Marie <semarie@online.fr>
+# Copyright (c) 2017-2018 Sebastien Marie <semarie@online.fr>
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -227,14 +227,14 @@ esac
 [[ -n "${RESPONSE_FILE}" && ! -e ${RESPONSE_FILE} ]] && \
 	uo_err 1 "file not found: ${RESPONSE_FILE}"
 
-# create and enter in working directory
+# create working directory
 WRKDIR=$(mktemp -dt upobsd.XXXXXXXXXX) || \
 	uo_err 1 "unable to create temporary directory"
 
 # download and check files
 uo_download
 
-# add response-file is requested
+# add response-file if requested
 [[ ${AUTO} != 'no' ]] && \
 	uo_addfile "auto_${AUTO}.conf" "${RESPONSE_FILE}"
 
