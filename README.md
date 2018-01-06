@@ -126,4 +126,10 @@ signify(1)
 was written by
 Sebastien Marie &lt;[semarie@online.fr](mailto:semarie@online.fr)&gt;.
 
+# CAVEATS
+
+**upobsd**
+could be unable to patch some archs due to stripped binary or because
+incompatible endianness.
+
 OpenBSD 6.2 - December 2, 2017
