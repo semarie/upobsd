@@ -201,6 +201,36 @@ uo_output() {
 	mv -- "${WRKDIR}/bsd.rd" "${OUTPUT}"
 }
 
+uo_arch_endianness() {
+	case "${1}" in
+	hppa|luna88k|macppc|octeon|sgi)
+		echo "MSB" ;;
+	alpha|amd64|arm64|armv7|i386|landisk|loongson)
+		echo "LSB" ;;
+	*)
+		uo_err 1 "unknown arch: ${1}"
+		echo "---" ;;
+	esac
+}
+
+uo_check_arch_endianness() {
+	[[ $(uo_arch_endianness "${1}") != $(uo_arch_endianness "${2}") ]] && \
+		uo_err 1 "incompatible endianness for patching: ${1} ${2}"
+}
+
+uo_check_arch_patchable() {
+	case "${1}" in
+	alpha|sparc64|hppa)
+		uo_err 1 "unpatchable arch (stripped): ${_arch}" ;;
+
+	arm64|i386|loongson|macppc|sgi|amd64|armv7|landisk|luna88k|octeon|socppc)
+		;;
+
+	*)
+		echo "warn: unknown arch (could be unpatchable): ${1}" >&2 ;;
+	esac
+}
+
 # parse command-line
 while getopts 'hvm:V:a:p:i:u:o:' arg; do
 	case "${arg}" in
@@ -226,6 +256,12 @@ esac
 
 [[ -n "${RESPONSE_FILE}" && ! -e ${RESPONSE_FILE} ]] && \
 	uo_err 1 "file not found: ${RESPONSE_FILE}"
+
+# check for patchable archs
+if [[ ${AUTO} != 'no' ]]; then
+	uo_check_arch_endianness "$(uname -m)" "${ARCH}"
+	uo_check_arch_patchable "${ARCH}"
+fi
 
 # create working directory
 WRKDIR=$(mktemp -dt upobsd.XXXXXXXXXX) || \
