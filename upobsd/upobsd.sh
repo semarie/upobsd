@@ -18,7 +18,7 @@ set -eu
 PATH='/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
 
 VERBOSE=0
-MIRROR=$(cat /etc/installurl)
+MIRROR=$(sed -e '/^$/d' -e '/^#/d' -e 'q' /etc/installurl)
 ARCH=$(uname -m)
 SIGNIFY_KEY=''
 AUTO='no'
