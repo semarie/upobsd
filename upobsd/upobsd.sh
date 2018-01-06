@@ -147,9 +147,6 @@ uo_addfile() {
 	# create mountpoint
 	mkdir "${WRKDIR}/ramdisk.d"
 
-	# first doas(1) call (to trigger persist)
-	uo_priv id >/dev/null
-
 	# prepare ramdisk for mounting
 	while ! uo_priv vnconfig "vnd${vnd_n}" "${WRKDIR}/ramdisk"; do
 		vnd_n=$(( vnd_n + 1 ))
