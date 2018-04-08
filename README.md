@@ -8,13 +8,13 @@ UPOBSD(1) - General Commands Manual
 
 **upobsd**
 \[**-v**]
-\[**-m**&nbsp;*mirror*]
-\[**-V**&nbsp;*version*]
-\[**-a**&nbsp;*arch*]
-\[**-p**&nbsp;*signify-key*]
-\[**-i**&nbsp;*install-response-file*]
-\[**-u**&nbsp;*upgrade-response-file*]
-\[**-o**&nbsp;*output*]
+\[**-m** *mirror*]
+\[**-V** *version*]
+\[**-a** *arch*]
+\[**-p** *signify-key*]
+\[**-i** *install-response-file*]
+\[**-u** *upgrade-response-file*]
+\[**-o** *output*]
 
 # DESCRIPTION
 
@@ -130,7 +130,7 @@ signify(1)
 
 **upobsd**
 was written by
-Sebastien Marie &lt;[semarie@online.fr](mailto:semarie@online.fr)&gt;.
+Sebastien Marie <[semarie@online.fr](mailto:semarie@online.fr)>.
 
 # CAVEATS
 
