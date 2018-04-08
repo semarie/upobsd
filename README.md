@@ -57,6 +57,12 @@ The options are as follows:
 > to show all steps of the process.
 > If the input is a terminal, progress bar for downloading will be always showed.
 
+**-m** *mirror*
+
+> Use the given mirror URL.
+> For the format, see
+> installurl(5).
+
 **-V** *version*
 
 > Select an operating system version.
@@ -132,4 +138,4 @@ Sebastien Marie &lt;[semarie@online.fr](mailto:semarie@online.fr)&gt;.
 could be unable to patch some archs due to stripped binary or because
 incompatible endianness.
 
-OpenBSD 6.2 - December 2, 2017
+OpenBSD 6.3 - April 8, 2018
