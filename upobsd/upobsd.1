@@ -94,8 +94,7 @@ files.
 By default, a key from
 .Pa /etc/signify
 is selected using the requested operating system version.
-But the right key should be manually selected when requesting a snapshot
-and its version is the next release.
+If the default key fails, a second try with the next version is done.
 .It Fl i Ar install-response-file
 Adds
 .Ar install-response-file
