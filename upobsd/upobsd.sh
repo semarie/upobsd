@@ -103,24 +103,38 @@ uo_check_signature() {
 		uo_err 2 "uo_check_signature: no SHA256.sig in WRKDIR"
 
 	if [ -z "${SIGNIFY_KEY}" ]; then
-		uo_signify "/etc/signify/openbsd-${SIGNIFY_VERSION}-base.pub"
+		uo_signify \
+			"/etc/signify/openbsd-${SIGNIFY_VERSION}-base.pub" \
+			"/etc/signify/openbsd-$(( ${SIGNIFY_VERSION} + 1 ))-base.pub"
 	else
 		uo_signify "${SIGNIFY_KEY}"
 	fi
 }
 
 uo_signify() {
-	local signify_key=${1}
+	local signify_all_keys="$*"
 
-	uo_verbose "checking signature: ${signify_key}"
+	while [[ $# != 0 ]]; do
+		local signify_key=${1}
 
-	[ -e "${signify_key}" ] || uo_err 1 "uo_check_signature: file not found: ${signify_key}"
+		echo "checking signature: ${signify_key}"
 
-	( cd "${WRKDIR}" && \
-		signify -qC -p "${signify_key}" -x SHA256.sig bsd.rd ) ||
-		uo_err 1 "invalid signature: ${signify_key}"
+		[ -e "${signify_key}" ] || \
+			uo_err 1 "uo_check_signature: file not found: ${signify_key}"
 
-	uo_verbose "signature is valid"
+		if ( cd "${WRKDIR}" && \
+			signify -qC -p "${signify_key}" -x SHA256.sig bsd.rd ) ; then
+			break
+		fi
+
+		shift
+	done
+
+	if [[ $# = 0 ]]; then
+		uo_err 1 "invalid signature: ${signify_all_keys}"
+	else
+		uo_verbose "signature is valid"
+	fi
 }
 
 uo_priv() {
