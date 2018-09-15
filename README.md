@@ -91,8 +91,7 @@ The options are as follows:
 > By default, a key from
 > */etc/signify*
 > is selected using the requested operating system version.
-> But the right key should be manually selected when requesting a snapshot
-> and its version is the next release.
+> If the default key fails, a second try with the next version is done.
 
 **-i** *install-response-file*
 
@@ -138,4 +137,4 @@ Sebastien Marie <[semarie@online.fr](mailto:semarie@online.fr)>.
 could be unable to patch some archs due to stripped binary or because
 incompatible endianness.
 
-OpenBSD 6.3 - April 8, 2018
+OpenBSD 6.4 - April 8, 2018
