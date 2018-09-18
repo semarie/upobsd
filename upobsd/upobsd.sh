@@ -170,7 +170,7 @@ uo_addfile() {
 	done
 
 	# mount ramdisk
-	if ! uo_priv mount -o noperm "/dev/vnd${vnd_n}a" "${WRKDIR}/ramdisk.d"; then
+	if ! uo_priv mount -o nodev,nosuid,noexec "/dev/vnd${vnd_n}a" "${WRKDIR}/ramdisk.d"; then
 		uo_priv vnconfig -u "vnd${vnd_n}" || true
 
 		uo_err 1 "unable to mount: /dev/vnd${vnd_n}a"
