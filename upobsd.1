@@ -49,7 +49,9 @@ to ensure integrity, and optionally patch the image for adding
 or
 .Pa auto_upgrade.conf
 file to add support of offline
-.Xr autoinstall 8 .
+.Xr autoinstall 8
+using
+.Xr rdsetroot 8 .
 .Pp
 Patching requires super-user privilegies in order to use
 .Xr vnconfig 8
@@ -118,8 +120,10 @@ Selects a different output name from
 in the current directory.
 .El
 .Sh SEE ALSO
+.Xr doas 1 ,
 .Xr ftp 1 ,
-.Xr signify 1
+.Xr signify 1 ,
+.Xr autoinstall 8
 .Sh AUTHORS
 .An -nosplit
 .Nm

@@ -37,7 +37,9 @@ to ensure integrity, and optionally patch the image for adding
 or
 *auto\_upgrade.conf*
 file to add support of offline
-autoinstall(8).
+autoinstall(8)
+using
+rdsetroot(8).
 
 Patching requires super-user privilegies in order to use
 vnconfig(8)
@@ -122,8 +124,10 @@ The options are as follows:
 
 # SEE ALSO
 
+doas(1),
 ftp(1),
-signify(1)
+signify(1),
+autoinstall(8)
 
 # AUTHORS
 
@@ -137,4 +141,4 @@ Sebastien Marie <[semarie@online.fr](mailto:semarie@online.fr)>.
 could be unable to patch some archs due to stripped binary or because
 incompatible endianness.
 
-OpenBSD 6.4 - April 8, 2018
+OpenBSD 6.5 - April 8, 2018

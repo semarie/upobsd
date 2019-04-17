@@ -1,10 +1,16 @@
-SUBDIR = 
-SUBDIR += elfrdsetroot
-SUBDIR += upobsd
+SCRIPT =	upobsd.sh
+MAN =		upobsd.1
 
-.include <bsd.subdir.mk>
+BINDIR ?=	/usr/local/bin
+MANDIR ?=	/usr/local/man/man
 
-README.md: upobsd/upobsd.1
-	mandoc -T markdown upobsd/upobsd.1 \
+README.md: upobsd.1
+	mandoc -T markdown upobsd.1 \
 		| sed -e 's/&nbsp;/ /g' -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&amp;/\&/g' \
 		>$@
+
+realinstall:
+	${INSTALL} ${INSTALL_COPY} -o ${BINOWN} -g ${BINGRP} -m ${BINMODE} \
+		${.CURDIR}/${SCRIPT} ${DESTDIR}${BINDIR}/upobsd
+
+.include <bsd.prog.mk>

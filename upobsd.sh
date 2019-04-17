@@ -15,7 +15,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 set -eu
-PATH='/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
+PATH='/sbin:/bin:/usr/sbin:/usr/bin'
 
 VERBOSE=0
 MIRROR=$(sed -e '/^$/d' -e '/^#/d' -e 'q' /etc/installurl)
@@ -156,7 +156,7 @@ uo_addfile() {
 	uo_verbose "adding response file: ${dest}: ${src}"
 
 	# extract ramdisk from bsd.rd
-	elfrdsetroot -x "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
+	rdsetroot -x "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
 
 	# create mountpoint
 	mkdir "${WRKDIR}/ramdisk.d"
@@ -202,7 +202,7 @@ uo_addfile() {
 	rmdir "${WRKDIR}/ramdisk.d"
 
 	# put ramdisk back in bsd.rd
-	elfrdsetroot "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
+	rdsetroot "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
 }
 
 uo_output() {
