@@ -127,7 +127,8 @@ The options are as follows:
 doas(1),
 ftp(1),
 signify(1),
-autoinstall(8)
+autoinstall(8),
+sysupgrade(8)
 
 # AUTHORS
 
@@ -141,4 +142,4 @@ Sebastien Marie <[semarie@online.fr](mailto:semarie@online.fr)>.
 could be unable to patch some archs due to stripped binary or because
 incompatible endianness.
 
-OpenBSD 6.5 - April 8, 2018
+OpenBSD 6.8 - January 17, 2021
