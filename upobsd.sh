@@ -149,11 +149,21 @@ uo_addfile() {
 	local dest=${1}
 	local src=${2}
 	local vnd_n=0
+	local compressed=
 
 	[ -r "${WRKDIR}/bsd.rd" ] || uo_err 2 "uo_addfile: no bsd.rd in WRKDIR"
 	[ -r "${src}" ] || uo_err 1 "file not found: ${src}"
 
 	uo_verbose "adding response file: ${dest}: ${src}"
+
+	# decompress if needed
+	if file -i -b "${WRKDIR}/bsd.rd" | grep -qE '^application/x-gzip$'; then
+		uo_verbose "decompressing bsd.rd"
+		compressed=yes
+
+		zcat "${WRKDIR}/bsd.rd" > "${WRKDIR}/bsd.rd.flat"
+		mv "${WRKDIR}/bsd.rd.flat" "${WRKDIR}/bsd.rd"
+	fi
 
 	# extract ramdisk from bsd.rd
 	rdsetroot -x "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
@@ -203,6 +213,14 @@ uo_addfile() {
 
 	# put ramdisk back in bsd.rd
 	rdsetroot "${WRKDIR}/bsd.rd" "${WRKDIR}/ramdisk"
+
+	# recompress if needed
+	if [ -n "$compressed" ]; then
+		uo_verbose "compressing bsd.rd"
+
+		gzip -n -9 "${WRKDIR}/bsd.rd"
+		mv "${WRKDIR}/bsd.rd.gz" "${WRKDIR}/bsd.rd"
+	fi
 }
 
 uo_output() {
